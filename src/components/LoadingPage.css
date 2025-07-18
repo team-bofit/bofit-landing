@@ -1,0 +1,269 @@
+.LoadingPage {
+  background-color: rgb(248, 253, 251);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  animation: pageIn 0.3s ease-out;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 로고 애니메이션 */
+.LoadingLogo {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  animation: logoSlideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  z-index: 10;
+}
+
+@keyframes logoSlideDown {
+  0% {
+    transform: translateX(-50%) translateY(-120px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50px);
+    opacity: 1;
+  }
+}
+
+.LoadingLogo .logoImage {
+  height: 90px;
+  width: 200px;
+  background-image: url("https://doda-static.com/img/600/65/1/1/1752736751640-1984109.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 로딩 컨텐츠 */
+.LoadingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px;
+  animation: contentFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+  opacity: 0;
+}
+
+@keyframes contentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 로딩 스피너 */
+.LoadingSpinner {
+  margin-bottom: 30px;
+  animation: spinnerIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+@keyframes spinnerIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(60, 217, 134, 0.15);
+  border-top: 3px solid rgb(60, 217, 134);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 로딩 텍스트 */
+.LoadingText {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(60, 217, 134);
+  text-align: center;
+  letter-spacing: -0.02em;
+  animation: textIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes textIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 하단 브랜드 */
+.LoadingFooter {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: footerFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
+  opacity: 0;
+}
+
+@keyframes footerFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  100% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.smoreCredit {
+  width: 120px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .LoadingLogo .logoImage {
+    height: 80px;
+    width: 180px;
+  }
+
+  @keyframes logoSlideDown {
+    0% {
+      transform: translateX(-50%) translateY(-100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(-50%) translateY(-50px);
+      opacity: 1;
+    }
+  }
+
+  .LoadingContent {
+    margin-top: 60px;
+    animation-delay: 0.3s;
+  }
+
+  .LoadingSpinner {
+    animation-delay: 0.5s;
+  }
+
+  .LoadingText {
+    animation-delay: 0.7s;
+  }
+
+  .spinner {
+    width: 35px;
+    height: 35px;
+    border-width: 2.5px;
+  }
+
+  .LoadingText {
+    font-size: 16px;
+  }
+
+  .LoadingFooter {
+    bottom: 30px;
+  }
+
+  .smoreCredit {
+    width: 100px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .LoadingLogo .logoImage {
+    height: 70px;
+    width: 160px;
+  }
+
+  @keyframes logoSlideDown {
+    0% {
+      transform: translateX(-50%) translateY(-80px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(-50%) translateY(-50px);
+      opacity: 1;
+    }
+  }
+
+  .LoadingContent {
+    margin-top: 40px;
+    animation-delay: 0.25s;
+  }
+
+  .LoadingSpinner {
+    animation-delay: 0.4s;
+  }
+
+  .LoadingText {
+    animation-delay: 0.6s;
+  }
+
+  .LoadingFooter {
+    animation-delay: 1s;
+  }
+
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 2px;
+  }
+
+  .LoadingText {
+    font-size: 15px;
+  }
+
+  .LoadingSpinner {
+    margin-bottom: 25px;
+  }
+
+  .LoadingFooter {
+    bottom: 25px;
+  }
+
+  .smoreCredit {
+    width: 90px;
+    height: 30px;
+  }
+} 

@@ -1,0 +1,347 @@
+.appContents {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  overflow: visible;
+}
+
+.ResultPage {
+  background-color: rgb(248, 253, 251);
+  color: rgb(0, 0, 0);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  overflow-x: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: pageSlideIn 0.6s ease-out forwards;
+}
+
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ResultPage.visible {
+  opacity: 1;
+}
+
+/* Result Image */
+.ResultImage {
+  width: 100%;
+  max-width: 600px;
+  height: 500px;
+  position: relative;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.ResultImage .imgHover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.ResultImage .image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Result Card */
+.ResultCard {
+  background-color: rgba(248, 253, 251, 0.8);
+  box-shadow: rgba(60, 217, 134, 0.19) 0px 5px 15px 0px;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(60, 217, 134, 0.1);
+}
+
+.ResultCardTitle {
+  margin-bottom: 20px;
+}
+
+.ResultCardTitle .smallTitle {
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.ResultCardTitle .mainTitle {
+  font-size: 32px;
+  color: rgb(60, 217, 134);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.Line {
+  height: 5px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.Line .box {
+  width: 50px;
+  height: 5px;
+  background-color: rgba(60, 217, 134, 0.4);
+  border-radius: 2.5px;
+}
+
+.ResultCardText {
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.ResultCardText p {
+  margin: 8px 0;
+}
+
+.Space {
+  height: 10px;
+  width: 100%;
+}
+
+/* Buttons */
+.btnContainer {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.Button {
+  background: rgb(60, 217, 134);
+  box-shadow: rgba(60, 217, 134, 0.34) 0px 5px 20px;
+  width: 70%;
+  max-width: 300px;
+  padding: 16px 24px;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out, background-color 0.2s, opacity 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.Button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: rgba(60, 217, 134, 0.5) 0px 10px 30px;
+}
+
+.Button:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.Button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.Button:hover::before {
+  left: 100%;
+}
+
+.btnIcon {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.btnIcon .material-icons {
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+}
+
+.btnText {
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  min-width: 130px;
+  text-align: center;
+}
+
+/* ByDoda Footer */
+.ByDoda {
+  width: 120px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.ByDoda:hover {
+  opacity: 1;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .ResultPage {
+    padding: 15px;
+  }
+
+  .ResultImage {
+    height: 380px;
+    margin-bottom: 25px;
+  }
+
+  .ResultCard {
+    padding: 30px 25px;
+    margin-bottom: 25px;
+  }
+
+  .ResultCardTitle .smallTitle {
+    font-size: 16px;
+  }
+
+  .ResultCardTitle .mainTitle {
+    font-size: 28px;
+  }
+
+  .ResultCardText {
+    font-size: 15px;
+  }
+
+  .Button {
+    width: 80%;
+    padding: 14px 20px;
+  }
+
+  .btnText {
+    font-size: 15px;
+    min-width: 120px;
+  }
+
+  .btnIcon .material-icons {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ResultPage {
+    padding: 10px;
+  }
+
+  .ResultImage {
+    height: 320px;
+    margin-bottom: 20px;
+  }
+
+  .ResultCard {
+    padding: 25px 20px;
+    margin-bottom: 20px;
+  }
+
+  .ResultCardTitle .smallTitle {
+    font-size: 15px;
+  }
+
+  .ResultCardTitle .mainTitle {
+    font-size: 24px;
+  }
+
+  .ResultCardText {
+    font-size: 14px;
+  }
+
+  .ResultCardText p {
+    margin: 6px 0;
+  }
+
+  .Button {
+    width: 85%;
+    padding: 12px 18px;
+  }
+
+  .btnText {
+    font-size: 14px;
+    min-width: 110px;
+  }
+
+  .btnIcon {
+    margin-right: 8px;
+  }
+
+  .btnIcon .material-icons {
+    font-size: 20px;
+  }
+
+  .ByDoda {
+    width: 100px;
+    height: 35px;
+  }
+}
+
+/* 애니메이션 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ResultPage.visible .ResultImage {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.ResultPage.visible .ResultCard {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.ResultPage.visible .btnContainer:nth-of-type(1) {
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+.ResultPage.visible .btnContainer:nth-of-type(2) {
+  animation: fadeInUp 0.6s ease-out 0.8s both;
+}
+
+.ResultPage.visible .ByDoda {
+  animation: fadeInUp 0.6s ease-out 1.0s both;
+}

@@ -1,0 +1,512 @@
+.QuizPage {
+  background-color: rgb(248, 253, 251);
+  color: rgb(0, 0, 0);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* 동적 viewport 높이 사용 */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.5s ease-in-out;
+  overflow: hidden;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
+  touch-action: manipulation; /* 터치 최적화 */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.QuizPage .Logo {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.QuizPage .logoImage {
+  height: 80px;
+  width: 180px;
+  background-image: url("https://doda-static.com/img/600/65/1/1/1752736751640-1984109.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.QuizProgressText {
+  color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-size: 16px;
+  margin-top: 140px;
+  margin-bottom: 20px;
+  animation: slideInDown 0.6s ease-out;
+}
+
+@keyframes slideInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.QuizProgressText .now {
+  font-weight: 700;
+  color: rgb(60, 217, 134);
+  font-size: 18px;
+}
+
+.QuizProgressText .total {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.ProgressBar {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto 40px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  animation: slideInLeft 0.7s ease-out;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.ProgressBar .back {
+  opacity: 0.6;
+  background-color: rgb(60, 217, 134);
+  color: rgb(255, 255, 255);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  font-size: 13px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.ProgressBar .back:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(60, 217, 134, 0.3);
+}
+
+.ProgressBg {
+  background-color: rgba(0, 0, 0, 0.07);
+  height: 20px;
+  border-radius: 10px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.Progress {
+  height: 20px;
+  background-color: rgb(60, 217, 134);
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+  box-shadow: 0 2px 10px rgba(60, 217, 134, 0.3);
+}
+
+.QuizContents {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.questionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  padding-top: 20px; /* 상단 여백 대폭 축소 */
+}
+
+.QuizCount {
+  margin-bottom: 15px;
+  animation: bounceIn 0.8s ease-out;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.QuizCount .text {
+  color: rgb(60, 217, 134);
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.textContainer {
+  margin-bottom: 25px;
+  animation: fadeInScale 0.7s ease-out 0.2s both;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.QuizText {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(0, 0, 0);
+  line-height: 1.3;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  min-height: 220px; /* 최소 높이 축소 */
+  align-items: center;
+  padding-bottom: 20px; /* 하단 여백 추가 */
+}
+
+/* 새 버튼들이 슬라이드 인할 때 */
+.buttons.slide-in .btnContainer {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.btnContainer {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 버튼 슬라이드 인 애니메이션 (오른쪽에서 등장) */
+.btnContainer.sliding-in {
+  animation: slideInFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 버튼 슬라이드 아웃 애니메이션 (왼쪽으로 촤라락) */
+.btnContainer.sliding-out {
+  animation: slideOutToLeft 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@keyframes slideOutToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-120px) scale(0.8);
+  }
+}
+
+.buttons .Button {
+  background: rgb(60, 217, 134);
+  box-shadow: rgba(60, 217, 134, 0.34) 0px 5px 20px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  transition: all 0.3s ease-in-out;
+  border-radius: 20px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  min-height: 48px;
+}
+
+.buttons .Button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: rgba(60, 217, 134, 0.5) 0px 8px 25px;
+}
+
+.buttons .Button:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.buttons .Button.selected {
+  background: rgb(45, 180, 110);
+  transform: scale(1.05);
+  box-shadow: rgba(60, 217, 134, 0.6) 0px 10px 30px;
+  animation: selectedPulse 0.3s ease-out;
+}
+
+@keyframes selectedPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.05); }
+}
+
+.buttons .Button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.buttons .Button:hover::before {
+  left: 100%;
+}
+
+.buttons .btnIcon {
+  display: none;
+}
+
+.buttons .btnText {
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.3;
+  white-space: pre-line;
+}
+
+/* 애니메이션 중 버튼 상호작용 제어 */
+.buttons.slide-out .Button {
+  pointer-events: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .QuizProgressText {
+    margin-top: 120px;
+    font-size: 14px;
+  }
+  
+  .QuizProgressText .now,
+  .QuizProgressText .total {
+    font-size: 16px;
+  }
+  
+  .QuizCount .text {
+    font-size: 32px;
+  }
+  
+  .QuizText {
+    font-size: 18px;
+  }
+  
+  .questionContainer {
+    padding-top: 15px; /* 태블릿에서도 여백 축소 */
+  }
+  
+  .buttons {
+    min-height: 200px; /* 태블릿에서도 높이 축소 */
+    gap: 6px;
+    padding-bottom: 18px; /* 태블릿에서 하단 여백 */
+  }
+  
+  .buttons .Button {
+    padding: 12px 18px;
+    min-height: 44px;
+  }
+  
+  .buttons .btnText {
+    font-size: 14px;
+  }
+  
+  .ProgressBar {
+    width: 85%;
+  }
+  
+  .ProgressBar .back {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
+  
+  .ProgressBg {
+    height: 18px;
+    border-radius: 9px;
+  }
+  
+  .Progress {
+    height: 18px;
+    border-radius: 9px;
+  }
+
+  .QuizPage .logoImage {
+    height: 70px;
+    width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .QuizPage {
+    min-height: 100vh;
+    min-height: 100svh; /* 작은 viewport 높이 사용 */
+  }
+
+  .QuizProgressText {
+    margin-top: 70px; /* 50px → 70px로 증가 */
+    margin-bottom: 15px; /* 20px → 15px로 축소 */
+    font-size: 12px;
+  }
+  
+  .QuizProgressText .now,
+  .QuizProgressText .total {
+    font-size: 14px;
+  }
+  
+  .QuizCount .text {
+    font-size: 24px; /* 28px → 24px로 축소 */
+    margin-bottom: 10px; /* 기본 margin 축소 */
+  }
+  
+  .QuizText {
+    font-size: 15px; /* 16px → 15px로 축소 */
+    margin-bottom: 15px; /* 기본 margin 축소 */
+  }
+  
+  .questionContainer {
+    padding-top: 5px; /* 10px → 5px로 더 축소 */
+    padding-bottom: 10px;
+  }
+  
+  .buttons {
+    min-height: 160px; /* 180px → 160px로 축소 */
+    gap: 4px; /* 5px → 4px로 축소 */
+    padding-bottom: 15px; /* 모바일에서 하단 여백 */
+  }
+  
+  .buttons .Button {
+    padding: 8px 14px; /* 10px 16px → 8px 14px로 축소 */
+    min-height: 36px; /* 40px → 36px로 축소 */
+    border-radius: 18px; /* 20px → 18px로 축소 */
+  }
+  
+  .buttons .btnText {
+    font-size: 12px; /* 13px → 12px로 축소 */
+    line-height: 1.3;
+  }
+  
+  .ProgressBar {
+    width: 90%;
+  }
+
+  .ProgressBar .back {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+  
+  .ProgressBg {
+    height: 20px;
+    border-radius: 10px;
+  }
+  
+  .Progress {
+    height: 20px;
+    border-radius: 10px;
+  }
+
+  .QuizPage .logoImage {
+    height: 60px;
+    width: 140px;
+  }
+
+  .QuizPage .Logo {
+    top: 10px; /* 20px → 10px로 축소 */
+  }
+
+  /* 모바일에서 슬라이드 거리 조정 */
+  @keyframes slideOutToLeft {
+    from {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-100px) scale(0.8);
+    }
+  }
+}
+
+/* 아주 작은 모바일 화면 (360px 이하) */
+@media (max-width: 360px) {
+  .QuizProgressText {
+    margin-top: 60px; /* 40px → 60px로 증가 */
+    margin-bottom: 10px;
+  }
+
+  .QuizCount .text {
+    font-size: 22px; /* 더 축소 */
+    margin-bottom: 8px;
+  }
+  
+  .QuizText {
+    font-size: 14px; /* 더 축소 */
+    margin-bottom: 12px;
+  }
+
+  .buttons {
+    min-height: 140px; /* 더 축소 */
+    gap: 3px; /* 더 축소 */
+    padding-bottom: 12px; /* 작은 모바일에서 하단 여백 */
+  }
+  
+  .buttons .Button {
+    padding: 6px 12px; /* 더 축소 */
+    min-height: 32px; /* 더 축소 */
+  }
+  
+  .buttons .btnText {
+    font-size: 11px; /* 더 축소 */
+  }
+
+  .ProgressBar .back {
+    width: 18px; /* ProgressBg와 높이 맞춤 */
+    height: 18px;
+    font-size: 11px; /* 아이콘 크기 축소 */
+  }
+  
+  .ProgressBg {
+    height: 18px; /* 더 두껍게 조정 */
+    border-radius: 9px;
+  }
+  
+  .Progress {
+    height: 18px; /* 더 두껍게 조정 */
+    border-radius: 9px;
+  }
+
+  .QuizPage .logoImage {
+    height: 50px; /* 더 축소 */
+    width: 120px;
+  }
+} 
